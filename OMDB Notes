@@ -1,0 +1,219 @@
+PARA EL SINGLE MOVIE HAY QUE METER UN IF TERNARIO
+
+            { invalidLength && hasChanged ? <ErrorDisplay>Please enter a name</ErrorDisplay> : null}
+
+
+para el mapeo de 
+
+
+        <div className='row'>
+            <h1>LOTSA MUBIS - ESTO VIENE DE movies</h1>
+
+            {props.movies.pelis && props.movies.pelis.Search.map(movie => (
+                <div key={movie.id} className="col-xs-4">
+                    <h1> {movie.Title} </h1>
+                    <img src={movie.Poster} />
+
+
+                </div>
+
+
+
+            ))}
+
+
+        </div>
+
+
+
+
+
+
+para mostrar una peli
+
+        <div>
+            <h1>LOTSA MUBIS - ESTO VIENE DE movies</h1>
+            {console.log(props.movies)}
+            <h1> {props.movies.pelis.Title} </h1>
+        <img src ={props.movies.pelis.Poster}/>
+        </div>
+
+
+
+PASSPORT (LO QUE FALTA):
+
+router.get('/usercheck', function(req,res){
+  console.log(req.user)
+})
+
+Welcome User !!! users {
+  dataValues:
+   { id: 1,
+     email: 'testUser1',
+     password: 'ea2dd2cd9c0842a15685068c494739766031c464',
+     salt: 'd86a9090ff8413088534f8b43f6f4ec29b47a41d',
+     createdAt: 2019-06-17T22:13:57.881Z,
+     updatedAt: 2019-06-17T22:13:57.881Z },
+  _previousDataValues:
+   { id: 1,
+     email: 'testUser1',
+     password: 'ea2dd2cd9c0842a15685068c494739766031c464',
+     salt: 'd86a9090ff8413088534f8b43f6f4ec29b47a41d',
+     createdAt: 2019-06-17T22:13:57.881Z,
+     updatedAt: 2019-06-17T22:13:57.881Z },
+  _changed: {},
+  _modelOptions:
+   { timestamps: true,
+     validate: {},
+     freezeTableName: false,
+     underscored: false,
+     paranoid: false,
+     rejectOnEmpty: false,
+     whereCollection: { email: 'testUser1' },
+     schema: null,
+     schemaDelimiter: '',
+     defaultScope: {},
+     scopes: {},
+     indexes: [],
+     name: { plural: 'users', singular: 'user' },
+     omitNull: false,
+     sequelize:
+      Sequelize {
+        options: [Object],
+        config: [Object],
+        dialect: [PostgresDialect],
+        queryInterface: [QueryInterface],
+        models: [Object],
+        modelManager: [ModelManager],
+        connectionManager: [ConnectionManager],
+        importCache: {} },
+     hooks: { beforeCreate: [Array] } },
+  _options:
+   { isNewRecord: false,
+     _schema: null,
+     _schemaDelimiter: '',
+     raw: true,
+     attributes:
+      [ 'id', 'email', 'password', 'salt', 'createdAt', 'updatedAt' ] },
+  isNewRecord: false }
+
+TENGO QUE HACER UN ACTION CREATOR QUE HAGA UN PEDIDO AXIOS A ESA RUTA "/usercheck" y lo setee en state.user, o lo pase como dispatch . Luego en  componentdidmount() de cada componente voy a chequear si en props (o en el state de store) para definir si lo dejo pasar, o para definir que rendereo en la pagina y que no.
+
+
+
+Ese console.log siempre va a devolver un usuario (si esta logueado)
+
+
+PASO A PASO DE LO QUE HICE::::
+
+
+
+CREATE SERVER.JS (BACK) REQUIRE EXPRESS
+EL INDEX.HTML TIENE QUE TENER ESTO :   <script type="text/javascript" src="/bundle.js"></script>
+bundle.js es el archivo que crea webpack que lo que hace es juntar todos los archivos en uno y pasarlo a un formato legible por el html
+el index.html tiene que tener el Id que se encuentra en el index.js del FRONT
+
+index.html (BACK)
+
+<body>
+  <div *****id="root"****** ></div>
+  <script type="text/javascript" src="/bundle.js"></script>
+</body>
+
+INDEX.JS (FRONT)
+ReactDOM.render((
+    <BrowserRouter>
+    <Route path = "/" component= {Main}/>
+</BrowserRouter>),
+    *****document.getElementById('root')*****
+)
+
+
+Creo un container Main que es lo que va a ser alimentado con toda la informacion 
+
+
+
+
+
+
+
+
+
+
+
+Front-End
+├── src
+│   ├── /assets
+│   ├── /components
+│   ├── /containers
+│   ├── /store
+│   │   ├── /actions
+│   │   ├── /reducers
+│   │   └── index.js
+│   ├── /utils
+│   └── index.js
+├── package.json
+└── webpack.config.js
+
+
+
+
+src: Carpeta donde estará el código fuente del front-end de nuestra app.
+assets: Imágenes y otros archivos estáticos.
+components: Todos nuestros componentes de REACT.
+containers: Nuestros containers de REACT.
+store: Todo lo relacionado con redux.
+utils: Funciones comunes a todos, si es que hay.
+
+
+
+Back-End
+.
+├── /models
+├── /public
+├── /config
+├── /routes
+├── /utils
+├── server.js
+└── package.json
+models: Modelos de la base de datos.
+public: A donde guardamos nuestros archivos estaticos.
+config: Cualquier estructura de configuración que pueda ir aislada como autenticación o conexiones a la db.
+routes: Los archivos de rutas.
+utils: Funciones comunes a todos, si es que hay.
+
+
+
+Con la App podremos:
+
+Buscar películas y listarlas. --- Main Component => FindMovie functionality //////////////// LISTO
+Poder ver los detalles de una película en particular.  -- Clickear en una peli que devolvio la busqueda te lleva a SingleAlbum Component (Juke) ///////////////// LISTO
+Crear Usuarios. -- Sequelize! Users table ////// LISTO
+Logearse con un usuario. -- Passport-Sequelize //// LISTO 
+Poder agregar una película a tu lista de favoritos. -- "Add to" functionality => Playlists Component (Juke) ///////// LISTO
+Ver tu lista de peliculas favoritas. -- "View" functionality => Playlists Component (Juke) /////// LISTO
+Poder sacar películas de tu lista de favoritos. "Remove"  functionality => Playlists Component (Juke) ////// LISTO
+
+Buscar Usuarios. -- Find by 
+Ver el perfil de un usuario con sus películas favoritas.
+
+
+
+
+
+jenkins continuous integration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
